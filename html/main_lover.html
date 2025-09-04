@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>happyBirthday</title>
+    <embed src="/html/music/timeMachine.MP3" autostart="true" loop="true" hidden="true"></embed>
+    <style>
+        .topMenu{
+            position:fixed;
+            z-index: 1;
+        }
+
+        ul {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        list-style-type: none;
+        margin: 0;
+        margin-right: 5px;
+        padding: 0;
+        overflow: hidden;
+        background-color: #b00808;
+        }
+     
+        li {
+
+            float: right;
+        }
+        
+        li a {
+            display: block;
+            color: rgb(239, 238, 238);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        /*鼠标移动到选项上修改背景颜色 */
+        li a:hover {
+            background-color: #378d24;
+        }
+        
+
+        .imageTop {
+        height: 3em;           /* 图片高度 = 字体大小 */
+        width: auto;           /* 宽度自适应，保持比例 */
+        margin-left: 10px;    /* 与文字间距 */
+        }
+
+        .header{
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .shell{
+            width: 100%;
+            position: relative;
+            padding: 100px 0;
+            transition: 0.3s ease 0s;
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .shell:before{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background:rgba(0, 0, 0, 0.5);;
+            content: "";
+        }
+
+
+        .title{
+            color: aliceblue;
+            font-size: 48px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .timeline{
+            display: flex;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            flex-direction: column;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .content-title{
+            font-weight: normal;
+            font-size: 70px;
+            margin: -10px 0 0 0;
+            transition: 0.4s;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        .content-desc{
+            margin: 0;
+            font-size: 15px;
+            box-sizing: border-box;
+            color: #fff;
+            line-height: 25px;
+        }
+
+        .timeline:before{
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            margin-left: -1px;
+            content: "";
+            background:rgba(255,255,255,0.5);
+        }
+
+        .item{
+            padding: 40px 0;
+            filter: blur(2px);
+            transition: 0.5s;
+            box-sizing: border-box;
+            width: calc(50% - 40px);
+            display: flex;
+            position: relative;
+            transform: translateY(-80px);
+
+        }
+
+        .item:before{
+            content: attr(data-text);
+            letter-spacing: 3px;
+            width: 100%;
+            position: absolute;
+            color: #fff;
+            font-size: 40px; /* 增大字体 */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 15px;
+            opacity: 0;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .item:nth-child(even){
+            align-self:flex-end;
+        }
+
+        .item:nth-child(even):before {
+        right: auto;
+        text-align: right;
+        left:calc(-100%-56px);
+        padding-left:0;
+        border-left: none;
+        border-right:2px solid rgba(255,255,255,0.5);
+        padding-right:15px;
+        }
+
+        .item--active {
+            opacity:1;
+            transform:translateY(0);
+            filter: blur(0px);
+        }
+        .item--active:before {
+                top:50%;
+                transition:0.3s all 0.2s;
+                opacity:1;
+        }
+
+        .item--active .content-title{
+            margin: -50px 0 20px 0;
+        }
+
+        .img{
+            margin-top: 20px;
+            max-width: 100%;
+            box-shadow: 0 10px 15px black;
+        }
+
+        .subtitle{
+            color: azure;
+            font-size: 16px;
+            letter-spacing: 5px;
+            margin: 10px 0 0 0;
+            font-weight: normal;
+        }
+
+        .footer{
+            padding: 95px 0;
+            text-align: center;
+        }
+
+        .footer a{
+            color: aliceblue;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width:750px){
+            .item{
+                align-self: baseline !important;
+                width: 100%;
+                padding: 0 30px 150px 80px;
+            }
+
+            .item:before{
+                left: 10px !important;
+                padding: 0 !important;
+                top: 50px;
+                text-align: center !important;
+                width: 60px;
+                border: none !important;
+            }
+
+            .item:last-child{
+                padding-bottom: 40px;
+            }
+        }
+
+        @media only screen and (max-width: 750px){
+            .timeline:before{
+                left:40px;
+            }
+        }
+
+    
+    </style>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="topMenu">
+        <ul>
+            <img class="imageTop" src="/html/Image/cat-/4.png">
+            <img class="imageTop" src="/html/Image/cat-/1.png">
+            <img class="imageTop" src="/html/Image/cat-/2.png">
+            <img class="imageTop" src="/html/Image/cat-/3.png">
+            <img class="imageTop" src="/html/Image/cat-/5.png">
+            <img class="imageTop" src="/html/Image/cat-/9.png">
+            <img class="imageTop" src="/html/Image/cat-/7.png">
+            <img class="imageTop" src="/html/Image/cat-/8.png">
+            <img class="imageTop" src="/html/Image/cat-/10.png">
+
+            <li><a href="/html/html/main_lover.html">复活爱人</a></li>
+            <li><a href="/html/html/main_oc.html">萌物祝福</a></li>
+            <li><a href="/html/html/main_effect.html">吃点蛋糕</a></li>
+            <li><a href="/html/index.html">首页</a></li>
+
+        </ul>
+    </div>
+
+    <div class="shell" id="shell">
+        <div class="header">
+            <h2 class="title">复活吧，我的爱人</h2>
+            <h3 class="subtitle">THE PAST LOVER</h3>
+        </div>
+        <div class="timeline">
+            <div class="item" data-text="小绿和小蓝">
+                <div class="content">
+                    <img src="/html/Image/lover/ll5.png" alt="" class="img">
+                    <img src="/html/Image/lover/ll1.png" alt="" class="img">
+                    <img src="/html/Image/lover/ll2.png" alt="" class="img">
+                    <h2 class="content-title">旧爱</h2>
+                    <p class="content-desc">
+                        世纪末彼岸花从中的死亡结界
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="米优">
+                <div class="content">
+                    <img src="/html/Image/lover/my.png" alt="" class="img">
+                    <img src="/html/Image/lover/my1.png" alt="" class="img">
+                    <img src="/html/Image/lover/my2.png" alt="" class="img">
+                    <h2 class="content-title">白月光</h2>
+                    <p class="content-desc">
+                        磕磕水仙得了
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="印飞星">
+                <div class="content">
+                    <img src="/html/Image/lover/x3.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/22.png" alt="" class="img">
+                    <img src="/html/Image/lover/2.png" alt="" class="img">
+                    <h2 class="content-title">爱过</h2>
+                    <p class="content-desc">
+                        凌宇沫你到底在干什么啊
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="米英">
+                <div class="content">
+                    <img src="/html/Image/lover/y.png" alt="" class="img">
+                    <img src="/html/Image/lover/my1.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/my2.jpg" alt="" class="img">
+                    <h2 class="content-title">粮多的富哥</h2>
+                    <p class="content-desc">
+                        黑塔利亚
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="安迷修">
+                <div class="content">
+                    <img src="/html/Image/lover/an.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/a1.png" alt="" class="img">
+                    <img src="/html/Image/lover/a2.png" alt="" class="img">
+                    <h2 class="content-title">帅过</h2>
+                    <p class="content-desc">
+                        "最后的骑士安迷修为您而来，美丽可爱的小姐。"
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="路明非">
+                <div class="content">
+                    <img src="/html/Image/lover/l1.png" alt="" class="img">
+                    <img src="/html/Image/lover/l2.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/l4.jpg" alt="" class="img">
+                    <h2 class="content-title">前夫哥</h2>
+                    <p class="content-desc">
+                        真前夫哥
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="速度">
+                <div class="content">
+                    <img src="/html/Image/lover/13.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/s1.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/s2.jpg" alt="" class="img">
+                    <img src="/html/Image/lover/s3.jpg" alt="" class="img">
+                    <h2 class="content-title">挚爱</h2>
+                    <p class="content-desc">
+                        你的最爱
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        (function($){
+            $.fn.timeline = function(){
+                var selectors = {
+                    id:$(this),
+                    item:$(this).find(".item"),
+                    activeClass:"item--active",
+                    img:".img"
+                };
+
+                selectors.item.eq(0).addClass(selectors.activeClass);
+                var imgSrc = selectors.item.first().find(selectors.img).first().attr("src");
+                var fullUrl = new URL(imgSrc, window.location.origin).href;
+                selectors.id.css("background-image", "url(" + fullUrl + ")");
+
+                var itemLength = selectors.item.length;
+                $(window).scroll(function(){
+                    var max ,min;
+                    var pos = $(this).scrollTop();
+                    selectors.item.each(function (i){
+                        min = $(this).offset().top;
+                        max = $(this).height() + $(this).offset().top;
+                        var that = $(this);
+
+                        if(i == itemLength -2 && pos > min + $(this).height / 2){
+                            selectors.item.removeClass(selectors.activeClass);
+                            var imgSrc = selectors.item.last().find(selectors.img).first().attr("src");
+                            var fullUrl = new URL(imgSrc, window.location.origin).href;
+                            selectors.id.css("background-image", "url(" + fullUrl + ")"
+                );
+                        selectors.item.last().addClass(selectors.activeClass);
+                    }
+
+                    else if(pos <= max -10 && pos >=min){
+                        var imgSrc = $(this).find(selectors.img).first().attr("src");
+                        var fullUrl = new URL(imgSrc, window.location.origin).href;
+                        selectors.id.css("background-image", "url(" + fullUrl + ")"
+                );
+                selectors.item.removeClass(selectors.activeClass);
+                $(this).addClass(selectors.activeClass);
+                }  
+              });
+             });
+            };
+        })(jQuery)
+
+        $("#shell").timeline();
+    </script>
+   
+        
+
+    
+</body>
+</html>

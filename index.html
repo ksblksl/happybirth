@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyBirthday</title>
+    <embed src="/html/music/happyBirth.mp3" autostart="true" loop="true" hidden="true"></embed>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            
+            margin: 0 10px;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #afaa9f;
+            background-image:url("Image/miao3.jpg") ;
+            font-size: 50px;
+            color: #fff;
+            padding-top: 10%;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .head {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-right: -30px;
+        }
+        
+        h2 {
+            position: relative;
+            font-weight: normal;
+            font-size: 2rem;
+            font-style: normal;
+            display: inline-block;
+        }
+        
+        h2::before, h2::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        
+        h2::before {
+            background-color: #ffc745;
+            animation: typing 4s steps(19) forwards;
+        }
+        
+        h2::after {
+            width: 2px;
+            background-color: #fff;
+            animation: typing 4s steps(19) forwards;
+        }
+        
+        @keyframes typing {
+            to {
+                left: 100%;
+            }
+        }
+        
+        .mainText {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 200px;
+        }
+        
+        .animate {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            color: red;
+            font-size: 150px;
+            border-bottom: 2px solid red;
+            white-space: nowrap; /* 确保文字不换行 */
+        }
+        
+        .animate:hover::before {
+            max-width: 100%;
+        }
+        
+        .animate::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 150px;
+            overflow: hidden;
+            max-width: 0;
+            color: green;
+            content: attr(data-hover);
+            border-bottom: 2px solid green;
+            -webkit-transition:max-width 0.5s;
+            -moz-transition:max-width 0.5s;
+            transition: max-width 0.5s;
+            white-space: nowrap; /* 确保文字不换行 */
+        }
+        
+        /* 猫跑动画容器 */
+        .cat-animation-container {
+            position: absolute;
+            top: calc(100% + 20px); /* 文字下方20px */
+            left: 0;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+        }
+        
+        /* 猫跑动画 */
+        .running-cat {
+            position: absolute;
+            top: 0;
+            left: -100px;
+            width: 50px;
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=" http://www.w3.org/2000/svg " viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="black"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: catRun 5s linear infinite;
+        }
+        
+        @keyframes catRun {
+            0% {
+                left: -100px;
+                transform: scaleX(1);
+            }
+            49% {
+                transform: scaleX(1);
+            }
+            50% {
+                left: 100%;
+                transform: scaleX(-1);
+            }
+            99% {
+                transform: scaleX(-1);
+            }
+            100% {
+                left: -100px;
+                transform: scaleX(1);
+            }
+        }
+        
+        /* 按钮容器 */
+        .go-container {
+            position: absolute;
+            top: calc(100% + 20px); /* 文字下方100px */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .go-button {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .go-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .go-button img {
+            width: 320px;
+            height: auto;
+        }
+
+        .make{
+            margin-left: 600px;
+            margin-top:400px;
+            text-align: right;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <h2>祝弯弯的笛子，明日方舟高手，土豆拥护者，曹喵喵喵喵人</h2>
+    </div>
+
+    <div class="mainText">
+        <h1 data-hover="生日快乐" class="animate">生日快乐</h1>
+        
+        <!-- 猫跑动画 -->
+        <div class="cat-animation-container">
+            <div class="running-cat"></div>
+        </div>
+    </div>
+    <div class="make">
+        <p>祝你所求皆如愿，所行化坦途，多喜乐，长安宁 </p>
+        <p>———朵制作</p>
+    </div>
+
+    <!-- 按钮容器 -->
+    <div class="go-container">
+        <button class="go-button" onclick="window.location.href='/html/main_effect.html'">
+            <img src="/html/Image/oc-/d2.png" alt="Go">
+        </button>
+    </div>
+
+</body>
+</html>
